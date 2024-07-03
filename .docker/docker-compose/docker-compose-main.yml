@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  main:
+    image: ${DOCKER_REGISTRY?}/${DOCKER_NAMESPACE?}/main-${ENV?}:${TAG?}
+    build:
+      context: ../
+      dockerfile: ./images/main/Dockerfile
+      args:
+        - SYSTEM_VERSION=${SYSTEM_VERSION?}
+        - APP_CODE_PATH=${APP_CODE_PATH_CONTAINER?}
+        - APP_GROUP_ID=${APP_GROUP_ID?}
+        - APP_GROUP_NAME=${APP_GROUP_NAME?}
+        - APP_USER_ID=${APP_USER_ID?}
+        - APP_USER_NAME=${APP_USER_NAME?}
+        - ENV=${ENV?}
+        - COMPOSER_VERSION=${COMPOSER_VERSION?}
+      target: ${ENV?}
